@@ -1,0 +1,1 @@
+echo "express api lint staged" && docker exec er_api bash && npx lint-staged

@@ -1,0 +1,1 @@
+echo "react lint staged" && docker exec er_react bash && npm lint-staged
