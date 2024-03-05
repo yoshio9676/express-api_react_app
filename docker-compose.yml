@@ -55,6 +55,7 @@ services:
     volumes:
       - ./react:/app
     working_dir: /app
+    command: npm run dev
     networks:
       - backend
     depends_on:
