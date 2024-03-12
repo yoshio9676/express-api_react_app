@@ -14,6 +14,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { theme } from '../../styles/theme';
 
 const StyledDialog = styled(Dialog)(({theme}) => ({
   '& .MuiDialogContent-root': {
@@ -27,7 +28,8 @@ const StyledDialogTitle = styled(DialogTitle)({
   py: 2,
   width: 'fif-content',
   textAlign: 'center',
-  fontSize: '16px'
+  fontSize: '16px',
+  fontWeight: 500
 });
 
 const StyledHeader = styled('header')({
@@ -39,8 +41,9 @@ const StyledHeader = styled('header')({
   alignItems: 'center',
   width: '100%',
   padding: '0 20px',
-  borderBottom: '2px solid #808080',
-  boxSizing: 'border-box'
+  borderBottom: `2px solid ${theme.palette.primary.dark}`,
+  boxSizing: 'border-box',
+  backgroundColor: theme.palette.primary.light
 });
 
 const StyledNav = styled('nav')({
@@ -49,6 +52,19 @@ const StyledNav = styled('nav')({
   gap: 5,
   alignItems: 'center'
 });
+
+const HeaderLinkText = ({text, action}: {text: string, action: () => void}) => {
+  return (
+    <CommonButton
+      variant='text'
+      onClick={action}
+      style={{
+        color: theme.palette.secondary.main,
+        fontWeight: 'bold'
+      }}
+    >{text}</CommonButton>
+  )
+}
 
 const Header = (): JSX.Element => {
   const [projectOpen, setProjectOpen] = useState<boolean>(false);
@@ -73,7 +89,7 @@ const Header = (): JSX.Element => {
         <StyledNav>
           {/* to top */}
           <IconLink
-            icon={<TimeToLeaveIcon/>}
+            icon={<TimeToLeaveIcon sx={{color: theme.palette.secondary.main}}/>}
             path='/'
             width={25}
             height={25}
@@ -83,10 +99,10 @@ const Header = (): JSX.Element => {
           <TextLink text='ダッシュボード' path='/dashboard'/>
 
           {/* project dialog */}
-          <CommonButton
-            variant='text'
-            onClick={handleProjectOpen}
-          >プロジェクト</CommonButton>
+          <HeaderLinkText
+            action={handleProjectOpen}
+            text='プロジェクト'
+          />
           <StyledDialog
             onClose={handleProjectClose}
             aria-labelledby='customized-dialog-title'
@@ -111,10 +127,10 @@ const Header = (): JSX.Element => {
           </StyledDialog>
 
           {/* recent watch dialog */}
-          <CommonButton
-            variant='text'
-            onClick={handleRecentWatchOpen}
-          >最近見た項目</CommonButton>
+          <HeaderLinkText
+            text='最近見た項目'
+            action={handleRecentWatchOpen}
+          ></HeaderLinkText>
           <StyledDialog
             onClose={handleRecentWatchClose}
             aria-labelledby='customized-dialog-title'

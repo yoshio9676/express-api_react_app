@@ -19,6 +19,7 @@ import {
 import AppRoute from '../../routes/AppRoute'
 import { SideBarMenuType, sideBarMenus } from '../../const/sideBarMenus'
 import { Link } from 'react-router-dom'
+import { theme as myTheme } from '../../styles/theme'
 
 const drawerWidth = 240
 
@@ -67,7 +68,9 @@ const Drawer = styled(MuiDrawer, {
       '& .MuiDrawer-paper': closedMixin(theme),
     }),
     '& .MuiPaper-root': {
-        marginTop: '50px'
+        marginTop: '50px',
+        backgroundColor: myTheme.palette.primary.light,
+        borderColor: myTheme.palette.primary.dark
     }
   }),
 );
@@ -100,9 +103,9 @@ const MainWithSideBar = () => {
                     </DrawerHeader>
                     <Divider/>
                     <List>
-                        {sideBarMenus.map((menu: SideBarMenuType) => (
+                        {sideBarMenus.map((menu: SideBarMenuType, index: number) => (
                             <Link to={menu.path} style={{textDecoration: 'none'}}>
-                                <ListItem key={menu.text} disablePadding sx={{display: 'block'}}>
+                                <ListItem key={menu.key + index} disablePadding sx={{display: 'block'}}>
                                     <ListItemButton
                                         sx={{
                                             minHeight: 48,

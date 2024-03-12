@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
+import { theme } from '../../../styles/theme'
 
 type IconLinkProp = {
     icon: JSX.Element,
@@ -12,7 +13,7 @@ type IconLinkProp = {
 const StyledIconLink = styled(Link)({
     height: '100%',
     width: '100%',
-    color: '#1976d2'
+    color: theme.palette.secondary.main
 });
 
 
