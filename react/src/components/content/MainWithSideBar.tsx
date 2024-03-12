@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled, Theme, CSSObject } from '@mui/material/styles'
 import {
     Box,
@@ -49,7 +49,7 @@ const DrawerHeader = styled('div')(({theme}: {theme: Theme}) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
+    height: '50px'
 }));
 
 const Drawer = styled(MuiDrawer, {
@@ -69,8 +69,7 @@ const Drawer = styled(MuiDrawer, {
     }),
     '& .MuiPaper-root': {
         marginTop: '50px',
-        backgroundColor: myTheme.palette.primary.light,
-        borderColor: myTheme.palette.primary.dark
+        border: 'none'
     }
   }),
 );
@@ -79,6 +78,14 @@ const StyledLiteItemText = styled(ListItemText)({
     '& .MuiTypography-root': {
         fontSize: '12px'
     }
+});
+
+const MainContentBox = styled(Box)({
+    flexGrow: 1,
+    backgroundColor: '#f0f0f0',
+    width: '100%',
+    height: 'calc(100vh - 50px)',
+    overflow: 'scroll'
 })
 
 const MainWithSideBar = () => {
@@ -90,6 +97,8 @@ const MainWithSideBar = () => {
     const handleDrawerClose = () => {
         setOpen(false);
     }
+
+    const [currentPage, setCurrentPage] = useState<string>(sideBarMenus[0].key);
 
     return (
         <>
@@ -104,8 +113,19 @@ const MainWithSideBar = () => {
                     <Divider/>
                     <List>
                         {sideBarMenus.map((menu: SideBarMenuType, index: number) => (
-                            <Link to={menu.path} style={{textDecoration: 'none'}}>
-                                <ListItem key={menu.key + index} disablePadding sx={{display: 'block'}}>
+                            <Link
+                                to={menu.path}
+                                style={{textDecoration: 'none'}}
+                                onClick={() => setCurrentPage(menu.key)}
+                                key={menu.key + index}
+                            >
+                                <ListItem
+                                    disablePadding
+                                    sx={{
+                                        display: 'block',
+                                        backgroundColor: currentPage === menu.key ? '#f0f0f0' : 'inherit'
+                                    }}
+                                >
                                     <ListItemButton
                                         sx={{
                                             minHeight: 48,
@@ -133,9 +153,11 @@ const MainWithSideBar = () => {
                         ))}
                     </List>
                 </Drawer>
-                <Box component='main' sx={{flexGrow: 1, p: 3}}>
-                    <DrawerHeader/>
-                    <AppRoute/>
+                <Box component='main' sx={{flexGrow: 1}}>
+                    <DrawerHeader sx={{padding: 0}}/>
+                    <MainContentBox>
+                        <AppRoute/>
+                    </MainContentBox>
                 </Box>
             </Box>
         </>

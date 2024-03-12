@@ -59,7 +59,8 @@ const HeaderLinkText = ({text, action}: {text: string, action: () => void}) => {
       variant='text'
       onClick={action}
       style={{
-        color: theme.palette.secondary.main,
+        color: '#808080',
+        // color: theme.palette.secondary.main,
         fontWeight: 'bold'
       }}
     >{text}</CommonButton>
@@ -89,14 +90,14 @@ const Header = (): JSX.Element => {
         <StyledNav>
           {/* to top */}
           <IconLink
-            icon={<TimeToLeaveIcon sx={{color: theme.palette.secondary.main}}/>}
+            icon={<TimeToLeaveIcon sx={{color: '#808080'}}/>}
             path='/'
             width={25}
             height={25}
           />
 
           {/* dashboard */}
-          <TextLink text='ダッシュボード' path='/dashboard'/>
+          <TextLink text='ダッシュボード' path='/dashboard' color='#808080'/>
 
           {/* project dialog */}
           <HeaderLinkText

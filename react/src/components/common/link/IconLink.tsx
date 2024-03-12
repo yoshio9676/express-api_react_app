@@ -13,7 +13,8 @@ type IconLinkProp = {
 const StyledIconLink = styled(Link)({
     height: '100%',
     width: '100%',
-    color: theme.palette.secondary.main
+    color: '#808080'
+    // color: theme.palette.secondary.main
 });
 
 
