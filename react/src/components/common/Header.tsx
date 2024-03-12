@@ -38,7 +38,9 @@ const StyledHeader = styled('header')({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
-  padding: '0 20px'
+  padding: '0 20px',
+  borderBottom: '2px solid #808080',
+  boxSizing: 'border-box'
 });
 
 const StyledNav = styled('nav')({
